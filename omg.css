@@ -39,7 +39,7 @@ h3 {
     width: 200px;
     flex-flow: wrap column;
     border-radius: 7px;
-    background-image: url("desf.jpg");
+    background-image: url("recursos/desf.jpg");
     background-position: center;
     background-size: cover;
     align-items: flex-start;
@@ -56,19 +56,19 @@ h3 {
 }
 
 #primero {
-    background-image: url("halo-background.jpg") ;
+    background-image: url("recursos/halo-background.jpg") ;
 }
 #segundo {
-    background-image: url("koa.jpeg") ;
+    background-image: url("recursos/koa.jpeg") ;
 }
 #tercero {
-    background-image: url("portal.jpg") ;
+    background-image: url("recursos/portal.jpg") ;
 }
 #cuarto {
-    background-image: url("dishonored.jpg") ;
+    background-image: url("recursos/dishonored.jpg") ;
 }
 #quinto {
-    background-image: url("masseffect2.jpg") ;
+    background-image: url("recursos/masseffect2.jpg") ;
 }
 
 
