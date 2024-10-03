@@ -1,0 +1,78 @@
+html {
+    color: white;
+    background-color:rgb(0, 0, 0);
+    font-family: Arial, Helvetica, sans-serif;
+
+}
+
+p {
+    margin-left: 9px; 
+    font-weight: 600;
+    color: black;
+}
+
+h1 {
+    text-transform: uppercase;
+    font-weight: 600;
+    font-family: sans-serif ;
+    font-size: 30px;
+    margin-left: 20px;
+    color: rgb(255, 255, 255);
+}
+
+h3 {
+    font-size: 17px;
+    margin-left: 9px;
+    color: black;
+}
+
+.flexbox {
+    margin-left: 10px;
+    flex-flow: wrap;
+    display: flex;
+    justify-content: flex-;
+}
+
+.game {
+    margin: 10px;
+    display: flex;
+    width: 200px;
+    flex-flow: wrap column;
+    border-radius: 7px;
+    background-image: url("desf.jpg");
+    background-position: center;
+    background-size: cover;
+    align-items: flex-start;
+}
+
+.imagen {
+    margin: 9px;
+    border-radius: 7px;
+    width:180px;
+    height:110px;
+    background-position: center;
+    background-size: cover;
+    border: 1px solid rgb(0, 0, 0);
+}
+
+#primero {
+    background-image: url("halo-background.jpg") ;
+}
+#segundo {
+    background-image: url("koa.jpeg") ;
+}
+#tercero {
+    background-image: url("portal.jpg") ;
+}
+#cuarto {
+    background-image: url("dishonored.jpg") ;
+}
+#quinto {
+    background-image: url("masseffect2.jpg") ;
+}
+
+
+
+
+
+
