@@ -1,0 +1,285 @@
+:root {
+    font-size: 17px;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    margin: 0;
+    background-color: #333;
+    color: #fff;
+    font-family: Sans-Serif, sans-serif;
+}
+
+header, footer , .grid{
+    width:100%;
+}
+
+header {
+    padding: 10px;
+    background-color: #112;
+    text-align: center;
+    border-bottom: 1px solid #eef;
+    font-weight: 900;
+    font-size: 1.8rem;
+}
+
+footer {
+    padding: 20px;
+    text-align: center;
+    background-color: #111;
+}
+
+.grid {
+    flex-grow: 1;
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+    gap: 10px;
+    margin:auto;
+    max-width: 1000px;
+}
+
+nav, aside {
+    padding: 5px;
+    position: sticky;
+    top: 0;
+    height: 100vh;
+    overflow: auto;
+}
+
+aside {
+    font-size: 0.8rem;
+    color: #eef;
+    background-color: #223;
+}
+
+nav {
+    background-color: #223;
+}
+
+main {
+    color:#111;
+    background-color: #ddf;
+    padding: 10px;
+    min-height: 100vh;
+}
+
+nav ul {
+    display: flex;
+    flex-direction: column;
+    padding: 3px;
+    margin:0;
+    gap: 10px;
+    list-style: none;
+    text-align: center;
+    font-weight: 500;
+}
+
+nav li {
+    color: #223;
+    background-color: #ddfe;
+    border-radius: 5px;
+    padding: 5px ;
+    border: 1px solid #ddf;
+}
+
+.caja_ventilador{
+
+    position:relative;
+
+    width:100%;
+    display: flex;
+    margin:auto;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 600px;
+    gap:20px;
+    padding:10px;
+    background: #f8732e;
+    border:2px solid #fff;
+    border-radius:  20px 20px;
+}
+
+.caja_ventilador img {
+    display:block;
+    width:90%;
+    border-radius: 100%;
+    border:2px solid #000;
+    box-shadow: 0 0 30px #0003;
+    animation:wuiu 0.4s both infinite linear;
+    animation-play-state: paused;
+    transition: 1s;
+    filter: hue-rotate(160deg) contrast(1.1);
+}
+
+.caja_ventilador p {
+    position: absolute;
+    color:#000;
+    font-family: Sans-Serif;
+    font-size: 13px;
+    width:80px;
+}
+
+.caja_ventilador p.frase_1 {
+    bottom:30px;
+    left:20px;
+    transform: rotate(-10deg);
+}
+
+.caja_ventilador p.frase_2 {
+    right:20px;
+    bottom:30px;
+    transform: rotate(10deg);
+}
+
+.caja_ventilador .boton_encender {
+    padding:20px;
+    color:#fff;
+    background-color: transparent;
+    font-size:20px;
+    border-radius:100px;
+    border:2px solid #111;
+    transition: 0.2s;
+}
+
+.caja_ventilador .boton_encender:has(input:checked) {
+    color:#fff;
+    border:2px #111 solid;
+    background-color: #111;
+}
+
+.caja_ventilador:has(.boton_encender input:checked)  img {
+    animation-play-state: running;
+}
+
+.caja_ventilador .boton_encender input {
+    display:none;
+}
+
+.caja_rotatoria{
+
+    position:relative;
+
+    width:100%;
+    display: flex;
+    margin:auto;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    max-width: 600px;
+    gap:20px;
+    padding:10px;
+    background: #2ec2f8;
+    border:2px solid #fff;
+    border-radius:  20px 20px;
+}
+
+.caja_rotatoria .div_rotador {
+    display:block;
+    width:90%;
+    border-radius: 100%;
+    border:2px solid #000;
+    box-shadow: 0 0 30px #0003;
+    animation:wuiu 0.4s both infinite linear;
+    animation-play-state: paused;
+    transition: 1s;
+    filter: contrast(1.1);
+}
+
+.caja_rotatoria p {
+    position: absolute;
+    color:#000;
+    font-family: Sans-Serif;
+    font-size: 13px;
+    width:80px;
+}
+
+.caja_rotatoria .boton_encender {
+    padding:20px;
+    color:#fff;
+    background-color: transparent;
+    font-size:20px;
+    border-radius:100px;
+    border:2px solid #111;
+    transition: 0.2s;
+}
+
+.caja_rotatoria .boton_encender:has(input:checked) {
+    color:#fff;
+    border:2px #111 solid;
+    background-color: #111;
+}
+
+.caja_rotatoria:has(.boton_encender input:checked)  img {
+    animation-play-state: running;
+}
+
+.caja_rotatoria .boton_encender input {
+    display:none;
+}
+
+
+
+@keyframes wuiu {
+
+    0% {
+
+        transform: rotate(0deg);
+    }
+    50%{
+        transform: rotate(180deg);
+    }
+    60% {
+        transform: rotate(216deg);
+    }
+    100% {
+        transform: rotate(359.9deg);
+        
+    }
+}
+
+
+
+@media screen and (max-width:600px ) {
+    
+    header {
+        font-size: 1.6rem;
+    }
+    
+    .grid {
+        grid-template-columns: 1fr;
+        grid-template-rows: min-content auto;
+        gap: 3px;
+    }
+    nav {
+        height: min-content;
+        position:static;
+    }
+    
+    nav ul {
+        flex-direction: row;
+        justify-content: center;
+    }
+    
+    nav li {
+        flex-grow: 1;
+    }
+    
+    main {
+        font-size: 0.75rem;
+        border-top-right-radius: 10px;
+    }
+    
+    aside {
+        display:none;
+    }
+    
+    
+}
+
