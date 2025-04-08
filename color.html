@@ -4,13 +4,14 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Generador de Paleta de Colores</title>
-    <style>
+        <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Segoe UI', sans-serif;
             max-width: 800px;
             margin: 0 auto;
+            color: #e0e0e0;
             padding: 20px;
-            background-color: #eef;
+            background-color: #1a1a1f;
         }
 
         .controls {
@@ -24,15 +25,20 @@
             padding: 0;
             border: none;
             cursor: pointer;
+            background: #2a2a35;
+            border-radius: 12px;
+            box-shadow: 5px 5px 10px #0f0f12, 
+                       -5px -5px 10px #25252c;
         }
 
         .colors-container {
             display: flex;
             flex-wrap: wrap;
             gap: 0;
-            border-radius: 8px;
+            border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            box-shadow: 8px 8px 16px #121216, 
+                       -8px -8px 16px #222228;
         }
 
         .color-box {
@@ -49,32 +55,100 @@
         .color-info {
             position: relative;
             padding: 8px;
-            background: transparent;
+            background: rgba(0, 0, 0, 0.3);
             color: white;
             text-align: center;
-            font-size: 12px;
+            font-size: 15px;
             display: flex;
-            background-color: #000a;
+            font-weight:bold;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            border-radius:0 0 10px 0;
-            border:1px solid ;
+            border-radius: 0 0 12px 0;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+                       inset -2px -2px 4px rgba(255, 255, 255, 0.1);
         }
 
         .copy-btn {
-            background: none;
-            border: 1px solid white;
+        display:none;!important
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
             color: white;
-            padding: 2px 8px;
-            margin:4px;
-            border-radius: 4px;
+            padding: 4px 12px;
+            margin: 4px;
+            border-radius: 6px;
             cursor: pointer;
             font-size: 10px;
+            transition: all 0.2s;
+            box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2),
+                      -2px -2px 4px rgba(255, 255, 255, 0.1);
         }
 
         .copy-btn:hover {
-            background: rgba(255,255,255,0.2);
+            background: rgba(255, 255, 255, 0.2);
+            box-shadow: inset 2px 2px 4px rgba(0, 0, 0, 0.2),
+                      inset -2px -2px 4px rgba(255, 255, 255, 0.1);
+        }
+        
+        .var-list {
+            font-family: 'Fira Code', monospace;
+            background-color: #202026;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 13px;
+            color: #e0e0e0;
+            position: relative;
+            line-height: 1.6;
+            box-shadow: 8px 8px 16px #121216, 
+                       -8px -8px 16px #222228;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .var-list .property {
+            color: #82aaff;
+        }
+
+        .var-list .value {
+            color: #c3e88d;
+        }
+
+        .var-list .unit {
+            color: #89ddff;
+        }
+
+        .var-list .comment {
+            color: #697098;
+            font-style: italic;
+        }
+
+        .var-container {
+            margin: 20px 0;
+        }
+
+        h2 {
+            color: #82aaff;
+            margin: 20px 0 10px;
+            font-size: 1.4em;
+        }
+
+        .copy-all-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            padding: 4px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 12px;
+            transition: all 0.2s;
+        }
+
+        .copy-all-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
         }
 
         @media (max-width: 600px) {
@@ -93,7 +167,61 @@
         <input type="color" id="colorPicker" value="#ff0000">
     </div>
     <div class="colors-container" id="colorsContainer"></div>
-
+    <div class="var-container">
+    <h2>Variables de Tamaño de Texto</h2>
+    <div class="var-list">
+    --font-xs: 1.2rem;<br>
+    --font-sm: 1.4rem;<br>
+    --font-md: 1.6rem;<br>
+    --font-lg: 1.8rem;<br>
+    --font-xl: 2rem;<br>
+    --font-2xl: 2.4rem;<br>
+    --font-3xl: 3rem;<br>
+    --font-4xl: 3.6rem;<br>
+    </div>
+    </div>
+    <div class="var-container">
+    <h2>Variables de Tamaño de Radius</h2>
+    <div class="var-list">
+    --radius-xs: 0.25rem;<br>
+    --radius-sm: 0.5rem;<br>
+    --radius-md: 1rem;<br>
+    --radius-lg: 1.5rem;<br>
+    --radius-xl: 2rem;<br>
+    --radius-full:999px;<br>
+    --radius-circle:100%;<br>
+    </div>
+    </div>
+    <div class="var-container">
+    <h2>Variables de Espaciado</h2>
+    <div class="var-list">
+    --space-xs: 0.25rem;<br>
+    --space-sm: 0.5rem;<br>
+    --space-md: 1rem;<br>
+    --space-lg: 1.5rem;<br>
+    --space-xl: 2rem;<br>
+    </div>
+    </div>
+    <h2>Variables de Z-Index</h2>
+    <div class="var-list">
+    --z-xs: 10;<br>
+    --z-sm: 50;<br>
+    --z-md: 100;<br>
+    --z-lg: 500;<br>
+    --z-xl: 1000;<br>
+    </div>
+    </div>
+    <h2>Variables de Box-Shadow</h2>
+    <div class="var-list">
+    --shadow-xs: 0 1px 2px rgba(0, 0, 0, 0.05);<br>
+    --shadow-sm: 0 2px 4px rgba(0, 0, 0, 0.1);<br>
+    --shadow-md: 0 4px 8px rgba(0, 0, 0, 0.1), 0 2px 4px rgba(0, 0, 0, 0.06);<br>
+    --shadow-lg: 0 8px 16px rgba(0, 0, 0, 0.1), 0 4px 8px rgba(0, 0, 0, 0.06);<br>
+    --shadow-xl: 0 12px 24px rgba(0, 0, 0, 0.15), 0 6px 12px rgba(0, 0, 0, 0.1);<br>
+    --shadow-depth: inset 0 0.2rem 0.3rem rgba(0, 0, 0, 0.2), 0 0.1rem 0.3rem rgba(255, 255, 255, 0.3);<br>
+    --shadow-raised: inset 0 0.3rem 0.3rem rgba(255, 255, 255, 0.2),0 0.3rem 0.4rem rgba(0, 0, 0, 0.3);<br>
+    </div>
+    </div>
     <script>
         function hexToRgb(hex) {
             hex = hex.replace('#', '');
