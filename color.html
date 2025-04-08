@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Generador de Paleta de Colores</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #eef;
+        }
+
+        .controls {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        #colorPicker {
+            width: 100px;
+            height: 50px;
+            padding: 0;
+            border: none;
+            cursor: pointer;
+        }
+
+        .colors-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .color-box {
+            flex: 1 1 0;
+            min-width: 50px;
+            min-height: 120px;
+            position: relative;
+            transition: transform 0.2s;
+            display: flex;
+            justify-content: start;
+            align-items: start;
+        }
+        
+        .color-info {
+            position: relative;
+            padding: 8px;
+            background: transparent;
+            color: white;
+            text-align: center;
+            font-size: 12px;
+            display: flex;
+            background-color: #000a;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            border-radius:0 0 10px 0;
+            border:1px solid ;
+        }
+
+        .copy-btn {
+            background: none;
+            border: 1px solid white;
+            color: white;
+            padding: 2px 8px;
+            margin:4px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 10px;
+        }
+
+        .copy-btn:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        @media (max-width: 600px) {
+            .colors-container {
+                flex-direction: column;
+            }
+            
+            .color-box {
+                width: 100% !important;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <input type="color" id="colorPicker" value="#ff0000">
+    </div>
+    <div class="colors-container" id="colorsContainer"></div>
+
+    <script>
+        function hexToRgb(hex) {
+            hex = hex.replace('#', '');
+            const r = parseInt(hex.substring(0,2), 16);
+            const g = parseInt(hex.substring(2,4), 16);
+            const b = parseInt(hex.substring(4,6), 16);
+            return [r, g, b];
+        }
+
+        function rgbToHsl(r, g, b) {
+            r /= 255, g /= 255, b /= 255;
+            let max = Math.max(r, g, b), min = Math.min(r, g, b);
+            let h, s, l = (max + min) / 2;
+
+            if (max !== min) {
+                const d = max - min;
+                s = l > 0.5 ? d / (2 - max - min) : d / (max + min);
+                switch(max) {
+                    case r: h = (g - b) / d + (g < b ? 6 : 0); break;
+                    case g: h = (b - r) / d + 2; break;
+                    case b: h = (r - g) / d + 4; break;
+                }
+                h /= 6;
+            }
+            return [h * 360, s * 100, l * 100];
+        }
+
+        function hslToHex(h, s, l) {
+            l /= 100;
+            const a = s * Math.min(l, 1 - l) / 100;
+            const f = n => {
+                const k = (n + h/30) % 12;
+                const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+                return Math.round(255 * color).toString(16).padStart(2, '0');
+            };
+            return `#${f(0)}${f(8)}${f(4)}`;
+        }
+
+        function generatePalette(hex) {
+            const [r, g, b] = hexToRgb(hex);
+            const [h, s, l] = rgbToHsl(r, g, b);
+            const colors = [];
+
+            // Generar tonos oscuros (1-4)
+            for (let i = 4; i > 0; i--) {
+                const newLightness = Math.max(l - (l / 4) * i, 1);
+                colors.push(hslToHex(h, s, newLightness));
+            }
+
+            // Color base (5)
+            colors.push(hex);
+
+            // Generar tonos claros (6-9)
+            for (let i = 1; i <= 4; i++) {
+                const newLightness = Math.min(l + ((100 - l) / 4) * i, 99);
+                colors.push(hslToHex(h, s, newLightness));
+            }
+
+            return colors;
+        }
+
+        function displayColors(colors) {
+            const container = document.getElementById('colorsContainer');
+            container.innerHTML = '';
+
+            colors.forEach(hex => {
+                const colorBox = document.createElement('div');
+                colorBox.className = 'color-box';
+                colorBox.style.backgroundColor = hex;
+                
+                const colorInfo = document.createElement('div');
+                colorInfo.className = 'color-info';
+                colorInfo.innerHTML = `
+                    <span>${hex}</span>
+                    <button class="copy-btn" onclick="copyHex('${hex}')">Copiar</button>
+                `;
+
+                colorBox.appendChild(colorInfo);
+                container.appendChild(colorBox);
+            });
+        }
+
+        function copyHex(hex) {
+            navigator.clipboard.writeText(hex);
+            alert('Color copiado: ' + hex);
+        }
+
+        // Event listeners
+        document.getElementById('colorPicker').addEventListener('input', (e) => {
+            const colors = generatePalette(e.target.value);
+            displayColors(colors);
+        });
+
+        // Generar paleta inicial
+        const initialColors = generatePalette(document.getElementById('colorPicker').value);
+        displayColors(initialColors);
+    </script>
+</body>
+</html>
